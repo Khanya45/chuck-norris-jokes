@@ -1,21 +1,19 @@
 from flask import Flask
-from flask import request
+import requests
 
 
 app = Flask(__name__)
 
 
-@app.route('/', methods=["GET"])
+@app.route('/', methods=['GET'])
 def projects_page():
     api_url = "https://api.chucknorris.io/jokes/random"
-    response = request.get(api_url).json()
+    response = requests.get(api_url).json()
     return \
         f'<img src="{response["icon_url"]}">' \
-        f'<h3>ID: {response["id"]}' \
-        f'<h3> Date it was created: {response["created_at"]}</h3>' \
-        f'<strong> Random joke:</strong>{response["value"]}'
+        f'<h2>ID: {response["id"]}</h2>' \
+        f' <h3>Date: {response["created_at"]}</h3>' \
+        f'<h2>Random jokes</h2>' \
+        f' <p>{response["value"]}</p>'
 
 
-if __name__ == '__main__':
-    app.debug = True
-    app.run()
