@@ -17,3 +17,13 @@ def projects_page():
         f' <p>{response["value"]}</p>'
 
 
+@app.route('/category', methods=['GET'])
+def category():
+    html = ""
+    api_url = "https://api.chucknorris.io/jokes/categories"
+    response = requests.get(api_url).json()
+    for i in response:
+        html += f'<h2>{i}<h2>\n'
+    return html
+
+
