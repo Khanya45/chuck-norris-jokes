@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, jsonify
 import requests
 
 
@@ -17,13 +17,18 @@ def projects_page():
         f' <p>{response["value"]}</p>'
 
 
-@app.route('/category', methods=['GET'])
-def category():
-    html = ""
+# @app.route('/category', methods=['GET'])
+# def category():
+#     html = ""
+#     api_url = "https://api.chucknorris.io/jokes/categories"
+#     response = requests.get(api_url).json()
+#     for i in response:
+#         html += f'<h2>{i}<h2>\n'
+#     return html
+
+
+@app.route('/categories', methods=['GET'])
+def get_categories():
     api_url = "https://api.chucknorris.io/jokes/categories"
     response = requests.get(api_url).json()
-    for i in response:
-        html += f'<h2>{i}<h2>\n'
-    return html
-
-
+    return jsonify(response)
